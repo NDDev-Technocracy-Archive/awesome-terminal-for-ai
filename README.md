@@ -1,3 +1,8 @@
+
+> **DEPRECATED.** This repository is archived and no longer maintained.
+> It is kept read-only for reference; its GDS anchor records
+> `lifecycle: archived` under `portfolio:archived-projects`.
+
 > ⚠️ **ABANDONED** (2026-07-07). This repository is frozen history. The owner's
 > terminal layer (toolkit verdicts, Brewfile, zsh configs with the agent gate)
 > now lives in the workstation module
