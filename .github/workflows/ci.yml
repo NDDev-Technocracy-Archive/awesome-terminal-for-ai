@@ -1,26 +1,31 @@
-name: spec-ci
+name: CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
-  spec-lint:
-    name: zsh syntax + markdown lint
+  # ---------------------------------------------------------------------------
+  # Bespoke job: zsh syntax check for the shipped shell configs.
+  # No ci-workflows equivalent exists for this.
+  # ---------------------------------------------------------------------------
+  zsh-syntax:
+    name: zsh syntax
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@b4ffde65f46336488b8621a4f500c1c0b6c0f1df # v4.1.1
+        with:
+          persist-credentials: false
 
       - name: Install zsh
         run: sudo apt-get update -q && sudo apt-get install -y -q zsh
@@ -33,5 +38,38 @@ jobs:
             echo "ok: $f"
           done
 
-      - name: markdownlint
-        run: npx --yes markdownlint-cli2@0.18.1 "**/*.md"
+  # ---------------------------------------------------------------------------
+  # Reusable workflow calls (pinned to ci-workflows SHA).
+  # ---------------------------------------------------------------------------
+  docs-quality:
+    name: docs-quality
+    permissions:
+      contents: read
+    uses: NDDev-it-com/ci-workflows/.github/workflows/docs-quality.yml@c26c516559c01166a35b852c0d2a925cc1bd8db8
+
+  actionlint:
+    name: actionlint
+    permissions:
+      contents: read
+    uses: NDDev-it-com/ci-workflows/.github/workflows/actionlint.yml@c26c516559c01166a35b852c0d2a925cc1bd8db8
+
+  secret-scan:
+    name: secret-scan
+    permissions:
+      contents: read
+    uses: NDDev-it-com/ci-workflows/.github/workflows/secret-scan.yml@c26c516559c01166a35b852c0d2a925cc1bd8db8
+
+  zizmor:
+    name: zizmor (SARIF)
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: NDDev-it-com/ci-workflows/.github/workflows/zizmor-sarif.yml@c26c516559c01166a35b852c0d2a925cc1bd8db8
+
+  dependency-review:
+    name: dependency-review
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: NDDev-it-com/ci-workflows/.github/workflows/public-dependency-review.yml@c26c516559c01166a35b852c0d2a925cc1bd8db8
