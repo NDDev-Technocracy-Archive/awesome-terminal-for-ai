@@ -1,16 +1,17 @@
 {
-  // Structural checks on; only line-length relaxed (tables and command
-  // examples). Historical corpora are excluded below, not rule-exempted.
+  // Narrow exceptions for this archived repository, everything else stays checked.
+  // The archived internal planning and metrics notes were never lint-clean (the earlier
+  // docs-quality lane failed on them too); the published README and TOOLKIT stay checked.
+  "ignores": ["planning/**", "metrics/**"],
   "config": {
-    "default": true,
-    "MD013": false
-  },
-  "ignores": [
-    "planning/**",
-    "metrics/**",
-    "rldyourterm/**",
-    ".serena/**",
-    "CHANGELOG.md",
-    "node_modules/**"
-  ]
+    // The archive deprecation banner is a blockquote that must open README.md.
+    "MD041": false,
+    "MD028": false,
+    // Table column style arrived in markdownlint after these documents were written.
+    "MD060": false,
+    // Awesome-list entries are single lines with long descriptions and URLs.
+    "MD013": false,
+    // Keep a Changelog repeats Added/Changed headings under each release.
+    "MD024": { "siblings_only": true }
+  }
 }
