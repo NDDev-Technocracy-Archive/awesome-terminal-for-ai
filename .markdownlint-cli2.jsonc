@@ -10,6 +10,8 @@
     // Table column style arrived in markdownlint after these documents were written.
     "MD060": false,
     // Awesome-list entries are single lines with long descriptions and URLs.
-    "MD013": false
+    "MD013": false,
+    // Keep a Changelog repeats Added/Changed headings under each release.
+    "MD024": { "siblings_only": true }
   }
 }
