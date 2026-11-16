@@ -1,7 +1,7 @@
 
-> **DEPRECATED.** This repository is archived and no longer maintained.
-> It is kept read-only for reference; its GDS anchor records
-> `lifecycle: archived` under `portfolio:archived-projects`.
+> Historical terminal-toolkit reference. Source CI and dependency maintenance
+> preserve the retained material; current terminal provisioning remains with
+> the workstation module. The historical verdicts and parked engine stay frozen.
 
 > ⚠️ **ABANDONED** (2026-07-07). This repository is frozen history. The owner's
 > terminal layer (toolkit verdicts, Brewfile, zsh configs with the agent gate)
@@ -77,3 +77,15 @@ engineering history. Daily-driver verdict meanwhile: Ghostty.
 MIT for this specification repo; the `rldyourterm` engine carries its own
 license. See [`LICENSE`](LICENSE), [`SECURITY.md`](SECURITY.md),
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## Source maintenance
+
+Run `just setup` to prepare the frozen Markdown lint dependency under this
+checkout, without package lifecycle scripts. It does not install the Brewfile
+or change user shell configuration. `just check` reads shell syntax, tracked
+documents, spelling and command formatting offline; `just test` checks the
+existing live documentation links. `just verify` combines both on the executor.
+
+The original historical-corpus Markdown exceptions and private-link exclusion
+remain in their existing files. Tool verdicts, Brewfile, shell configs, VERSION
+and the parked engine pin are unchanged by source maintenance.

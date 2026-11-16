@@ -1,0 +1,7 @@
+{
+  "name": "terminal-reference-quality",
+  "private": true,
+  "devDependencies": {
+    "markdownlint-cli2": "0.24.1"
+  }
+}
