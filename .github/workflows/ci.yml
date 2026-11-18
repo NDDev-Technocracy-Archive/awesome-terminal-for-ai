@@ -18,7 +18,8 @@ jobs:
       setup: true
       node-version: '26.13.1'
       bun-version: '1.4.4'
-      tools: lychee@0.24.2,typos@1.52.2
+      tools: typos@1.52.2
+      tool-assets: .github/ci-tools.json
 
   gate:
     needs: [check]
