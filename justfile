@@ -4,8 +4,9 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 default:
     @just --list
 
-# Prepares only the frozen project lint dependency without package lifecycle scripts.
+# Prepares the hosted shell and the frozen lint dependency.
 setup:
+    python3 -B tools/prepare_ci.py
     bun install --cwd .github/quality --frozen-lockfile --ignore-scripts
 
 # Checks shell syntax, tracked documents, spelling and command formatting offline.
